@@ -86,7 +86,7 @@ const organizeDataByUserId = async () => {
     // Crear un objeto para organizar los datos por usuario
     const dataByUserId = {};
 
-    // Inicializar el objeto con IDs de usuarios como claves y estructura vacía como valores
+    // inicializar el objeto con IDs de usuarios como claves y estructura vacia como valores
     usersData.forEach((user) => {
         dataByUserId[user.id] = {
             user: user,       
@@ -95,10 +95,10 @@ const organizeDataByUserId = async () => {
         };
     });
 
-    // Añadir publicaciones al usuario correspondiente
+    // añadir publicaciones al usuario correspondiente
     postsData.forEach((post) => {
         if (dataByUserId[post.userId]) {
-            // Inicializamos cada publicación con un campo "comments" vacío
+            // inicializamos cada publicacion con un campo "comments" vacio
             dataByUserId[post.userId].posts.push({
                 ...post,       
                 comments: [],  
@@ -106,7 +106,7 @@ const organizeDataByUserId = async () => {
         }
     });
 
-    // Añadir comentarios a las publicaciones correspondientes
+    // añadir comentarios a las publicaciones correspondientes
     commentsData.forEach((comment) => {
         const userEntry = Object.values(dataByUserId).find((user) =>
             user.posts.some((post) => post.id === comment.postId)
@@ -120,7 +120,7 @@ const organizeDataByUserId = async () => {
         }
     });
 
-    // Añadir álbumes al usuario correspondiente
+    // añadir albumes al usuario correspondiente
     albumsData.forEach((album) => {
         if (dataByUserId[album.userId]) {
             dataByUserId[album.userId].albums.push({
@@ -130,7 +130,7 @@ const organizeDataByUserId = async () => {
         }
     });
 
-    // Añadir fotos a los álbumes correspondientes
+    // añadir fotos a los Albumes correspondientes
     photosData.forEach((photo) => {
         const userEntry = Object.values(dataByUserId).find((user) =>
             user.albums.some((album) => album.id === photo.albumId)
